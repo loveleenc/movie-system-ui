@@ -1,0 +1,50 @@
+.resetFilterMoviesButton{
+    position:absolute;
+    inset-inline-start: 50%;
+}
+
+.filterMoviesButton{
+    position:absolute;
+    right:0;
+}
+
+.filterMoviesDialogContainer{
+    
+}
+
+.allMoviesContentContainer{
+    position: relative;
+    border-color: black; 
+    border-width: 2px;
+    border-style:solid;
+    height:600px;
+    width: 95vw;
+    margin:auto;
+}
+
+.moviesContainer{
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    /* inset-block-start: 25px; */
+    /* inset-block-end: -100px; */
+    /* inset-inline-start: 1%; */
+    /* border-color: black;
+    border-width: 2px;
+    border-style:solid; */
+    width: 98%;
+}
+
+.movieFilterDialog{
+    position:absolute;
+    right:0;
+    /* top:0; */
+    /* inset-inline-end: 0%; */
+    width:fit-content;
+    /* border-color: black;
+    border-width: 2px;
+    border-style:solid; */
+    background-color: royalblue;
+    z-index: 1;
+}
+

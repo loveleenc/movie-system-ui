@@ -1,0 +1,18 @@
+
+.movie-sprite-container{
+    border-color: black;
+    border-width: 5px;
+    border-style: double;
+    position: relative;
+}
+
+.movie-sprite-container > .leftButton{
+    position: absolute;
+    inset-block-start: 50%;
+}
+
+.movie-sprite-container > .rightButton{
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0%;
+}

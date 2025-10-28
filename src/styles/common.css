@@ -1,0 +1,21 @@
+.movie-sprite{
+    display: inline-block;
+    border-radius: 10px;
+    border-color: orange;
+    border-width: 3px;
+    border-style:groove;
+    padding: 5px;
+    width: 185px;
+    text-align: center;
+}
+
+.movie-sprite:hover{
+    
+}
+
+.movie-sprite > span{
+}
+
+.movie-sprite > img{
+    margin: auto;
+}
