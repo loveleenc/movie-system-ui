@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import type { Movie } from "../../types/movie";
 import movieService from "../../services/movieService";
 import Header from "../Header";
-import MovieFilter from "./FilterDialog";
+import MovieFilter from "./MovieFilter";
 import MovieInformation from "../Common/MovieInformation";
 
 const AllMovies = () => {
@@ -21,8 +21,11 @@ const AllMovies = () => {
 
   const onClickingMovie = (id:number) => {
     setCurrentMovieId(id);
-    movieDialogRef.current?.showModal();
   }
+
+  useEffect(() => {
+    movieDialogRef.current?.showModal();
+  }, [currentMovieId])
 
   const getMovie = ():Movie | null => {
     const filteredMovies:Movie[] = movies.filter(movie => movie.id === currentMovieId)

@@ -3,9 +3,9 @@ import "../../styles/common.css";
 
 const MovieSprite = ({ movie, onClickingSprite }: { movie: Movie; onClickingSprite: (id: number) => void }) => {
   return (
-    <div className="movie-sprite" onClick={() => onClickingSprite(movie.id)}>
-      <img src={movie.poster}/>
-      <span>{movie.name}</span>
+    <div className="movie-sprite" >
+      <img src={movie.poster} onClick={() => onClickingSprite(movie.id)}/>
+      <span className="commonFontColor">{movie.name}</span>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { Genre, Language } from "../../types/movie";
-import Togglable from "../Common/Togglable";
 import "../../styles/movies.css";
 import type { Movie, movieFilters } from "../../types/movie";
 import { useState, type FormEvent, type SetStateAction } from "react";
@@ -77,22 +76,6 @@ const FilterDialog = ({
   );
 };
 
-const MovieFilter = ({
-  setMovies,
-  allMovies
-}: {
-  setMovies: React.Dispatch<SetStateAction<Movie[]>>;
-  allMovies: Movie[]
-}) => {
-  return (
-    <Togglable
-      buttonClassName="filterMoviesButton"
-      buttonText="Filter"
-      displayElementContainerClassName="filterMoviesDialogContainer"
-    >
-      <FilterDialog setMovies={setMovies} allMovies={allMovies}/>
-    </Togglable>
-  );
-};
 
-export default MovieFilter;
+export default FilterDialog
+

@@ -1,10 +1,13 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import type { Movie, movieFilters } from "../types/movie";
 
 const baseUrl:string = "http://localhost:8080";
 
 const getAll = ():Promise<Movie[]> => {
-    return axios.get(`${baseUrl}/movies`).then(response => response.data);
+    const config:AxiosRequestConfig = {
+        withCredentials: true
+    }
+    return axios.get(`${baseUrl}/movies`, config).then(response => response.data);
 }
 
 const getNowShowing = ():Promise<Movie[]> => {

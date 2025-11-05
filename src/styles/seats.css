@@ -1,0 +1,151 @@
+.screenDesign {
+  color: oldlace;
+  text-align: center;
+  border-radius: 5px;
+  background-color: darkgrey;
+  width: 900px;
+  height: 35px;
+  line-height: 35px;
+  font-family: sans-serif;
+  font-weight: 5;
+  font-size: 1.3em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rowIdContainer {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: top;
+}
+
+.rowId {
+  width: 100px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 1.3em;
+}
+
+.seat {
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.seat:hover {
+  background-color: gold !important;
+}
+
+.ticketStatusLegend {
+  position: relative;
+  top: 50px;
+  left: 80px;
+  background-color: #1E253A;
+  width: 180px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.statusLegend {
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 10px;
+}
+
+.statusLegend.availableStatus {
+  background-color: #fbf7f5;
+  top: 20px;
+}
+
+.statusLegend.bookedStatus {
+  background-color: #5C677D;
+  top: 80px;
+}
+
+.statusLegend.selectedStatus {
+  background-color: #2E9CCA;
+  top: 140px;
+}
+
+.ticketStatusLegend>.statusText {
+  position: absolute;
+  left: 65px;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #fbf7f5;
+}
+
+.ticketStatusLegend>.availableStatusText {
+  top: 30px;
+}
+
+.ticketStatusLegend>.bookedStatusText {
+  top: 90px;
+}
+
+.ticketStatusLegend>.selectedStatusText {
+  top: 150px;
+}
+
+.seatRowsContainer {
+  height: 470px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+  background-color: gray;
+  position: relative;
+  top: -200px;
+}
+
+.seatContainer {
+  /* background-color: red; */
+  display: inline-block;
+  height: fit-content;
+}
+
+.selectionOverview{
+  position: relative;
+  bottom: 650px;
+  left: 1000px;
+  background-color: #1E253A;
+  width: 250px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.selectionOverview > .seatCount {
+  position: absolute;
+  font-weight: 400;
+  font-size: 1.3em;
+  top: 5px;
+  left: 10px;
+}
+
+.selectionOverview > .seatPrice {
+  position: absolute;
+  font-weight: 400;
+  font-size: 1.3em;
+  top: 5px;
+  right: 10px;
+}
+
+.selectionOverview > .addToCartButton {
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  font-weight: 400;
+  font-size: 1.3em;
+  color: black;
+  background-color: gold;
+  border-style: none;
+  border-radius: 5px;
+  width: 200px;
+}

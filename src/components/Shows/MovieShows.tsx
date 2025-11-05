@@ -1,33 +1,83 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+  type NavigateFunction,
+} from "react-router-dom";
 import showService from "../../services/showService";
-import type { Show } from "../../types/show";
+import type { ShowsByTheatre, ShowInformation } from "../../types/show";
+import Header from "../Header";
 
-const ShowWidget = ({show}: {show:Show}) => {
-    return(<>
-    <h3>Date: {show.startTime.toDateString()}</h3>
-    <div>location: {show.theatre.location}</div>
-    <div>theatre: {show.theatre.name}</div>
-    <div>start: {show.startTime.toLocaleTimeString()}</div>
-    <div>end: {show.endTime.toLocaleTimeString()}</div>
-    <div>language: {show.language}</div>
-    </>)
-}
+const ShowWidget = ({
+  show,
+  ticketNavFunction,
+}: {
+  show: ShowInformation;
+  ticketNavFunction: NavigateFunction;
+}) => {
+  const navigateToTickets = (id: string) => {
+    ticketNavFunction(`/show/${id}/tickets`);
+  };
+
+  return (
+    <>
+      <div>
+        <span>{show.date}</span>
+        <span>
+          {show.startTime} - {show.endTime}
+        </span>
+        <button onClick={() => navigateToTickets(show.id)}>Book seats</button>
+      </div>
+    </>
+  );
+};
+
+const TheatreWidget = ({
+  theatre,
+  ticketNavFunction,
+}: {
+  theatre: ShowsByTheatre;
+  ticketNavFunction: NavigateFunction;
+}) => {
+  return (
+    <>
+      <h2>{theatre.location}</h2>
+      <h3>{theatre.name}</h3>
+      {theatre.languages.map((language) => (
+        <div>
+          <div>{language.language}</div>
+          {language.shows.map((show, index) => (
+            <ShowWidget key={index} show={show} ticketNavFunction={ticketNavFunction} />
+          ))}
+        </div>
+      ))}
+    </>
+  );
+};
 
 const MovieShows = () => {
-    const [shows, setShows] = useState<Show[]>([]);
-    const movieId = useParams().id;
+  const [shows, setShows] = useState<ShowsByTheatre[]>([]);
+  const movieId = useParams().id;
+  const navigate: NavigateFunction = useNavigate();
 
-    useEffect(() => {
-        showService.getShowsForMovie(Number(movieId))
-            .then(s => setShows(s));
-    }, []);
+  useEffect(() => {
+    showService.getShowsForMovie(Number(movieId)).then((s) => setShows(s));
+  }, []);
 
-    return(
-        <>
-        {shows.map((show, index) => <ShowWidget key={index} show={show} />)}
-        </>
-    )
-}
+  return (
+    <>
+      <Header />
+      <h1 className="commonFontColor">Showtimes</h1>
+
+      {shows.map((show, index) => (
+        <TheatreWidget
+          key={`theatre${index}`}
+          theatre={show}
+          ticketNavFunction={navigate}
+        />
+      ))}
+    </>
+  );
+};
 
 export default MovieShows;

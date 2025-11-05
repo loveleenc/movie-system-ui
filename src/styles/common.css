@@ -1,21 +1,61 @@
-.movie-sprite{
-    display: inline-block;
-    border-radius: 10px;
-    border-color: orange;
-    border-width: 3px;
-    border-style:groove;
-    padding: 5px;
-    width: 185px;
-    text-align: center;
+.commonFontColor{
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color:#fbf7f5;
 }
 
-.movie-sprite:hover{
-    
+.movie-sprite {
+  display: inline-block;
+  border-radius: 10px;
+  border-color: orange;
+  border-width: 3px;
+  border-style: groove;
+  padding: 5px;
+  width: 185px;
+  text-align: center;
 }
 
-.movie-sprite > span{
+.movie-sprite:hover {
 }
 
-.movie-sprite > img{
-    margin: auto;
+.movie-sprite > span {
+}
+
+.movie-sprite > img {
+  margin: auto;
+}
+
+.navigationBarButton {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  height: 30px;
+  width: 110px;
+  text-align: center;
+  line-height: 30px;
+  margin-left: 5px;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #1a1a1a;
+  cursor:pointer;
+  transition: border-color 0.25s;
+  color: #fbf7f5;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+}
+
+.headerContainer{
+  position: relative;
+  top:0px;
+  left: 5px;
+  background-color: red;
+  height: 40px;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  vertical-align: middle;
+}
+
+
+:root{
+  background-color: #0B132B;
 }

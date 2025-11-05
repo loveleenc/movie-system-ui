@@ -2,9 +2,8 @@ import type React from "react";
 import type { Movie } from "../../types/movie"
 import { Link } from "react-router-dom";
 
-
+//TODO: add styling for dialog
 const MovieInformation = ({movie, dialogRef}: {movie: Movie | null; dialogRef: React.RefObject<HTMLDialogElement | null>}) => {
-
 
     if(movie === null){
         return <></>
