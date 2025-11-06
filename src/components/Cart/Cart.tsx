@@ -4,6 +4,7 @@ import cartService from "../../services/cartService"
 import type { DisplayedItem, Item, ItemsByMovie } from "../../types/cart"
 import CartMovieItem from "./CartMovieItem"
 import "../../styles/cart.css"
+import Checkout from "./Checkout"
 
 const createDisplayedItem = (item: Item): DisplayedItem => {
     return {
@@ -58,6 +59,7 @@ const parseCartData = (items: Item[]): ItemsByMovie[] => {
 
 const Cart = () => {
     const [items, setItems] = useState<Item[]>([]);
+    const [displayCheckout, setDisplayCheckout] = useState<boolean>(false);
 
     useEffect(() => {
         cartService.getCart()
@@ -70,7 +72,26 @@ const Cart = () => {
             .then(_response => {
                 const filteredItems = items.filter(item => item.id.toString() !== id)
                 setItems(filteredItems);
-            })
+                setDisplayCheckout(false);
+            });
+    }
+
+    const onCheckout = () => {
+        cartService.checkout()
+            .then(_response => setDisplayCheckout(true))
+            .catch(error => console.log(error.getMessage())) //TODO:handle error
+    }
+
+    if(items.length == 0){
+        return (
+            <>
+                <Header />
+                <div className="cartContainer">
+                    <h1 className="commonFontColor">Cart</h1>
+                    <div className="commonFontColor">Cart is empty!</div>
+                </div>
+            </>
+        )
     }
 
     return (
@@ -80,7 +101,11 @@ const Cart = () => {
                 <h1 className="commonFontColor">Cart</h1>
                 <hr />
                 {parseCartData(items).map((item, index) => <CartMovieItem key={index} item={item} onRemovingItem={onRemovingItem} />)}
+                <div className="cartButtonContainer">
+                    <button className="cartButton" onClick={onCheckout} style={{display: items.length !== 0 ? '' : 'none'}}>checkout</button>
+                </div>
             </div>
+            <Checkout items={items} displayCheckout={displayCheckout}/>
         </>
     )
 }

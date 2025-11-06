@@ -52,8 +52,23 @@ const removeItemFromCart = (itemId: string) => {
     return axios.patch(`${baseUrl}/cart/remove`, {}, requestConfig);
 }
 
+const checkout = () => {
+    const csrfToken = document.cookie.replace(
+        /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1"
+    );
+    const requestConfig: AxiosRequestConfig = {
+        withCredentials: true, 
+        headers: {
+            "X-XSRF-TOKEN": csrfToken,
+        }
+    }
+    return axios.post(`${baseUrl}/cart/checkout`, {}, requestConfig);
+}
+
 export default {
     addMultipleItemsToCart,
     getCart,
-    removeItemFromCart
+    removeItemFromCart,
+    checkout
 } 

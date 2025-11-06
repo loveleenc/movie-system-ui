@@ -1,11 +1,11 @@
-.cartContainer{
-    width: 700px;
+.cartContainer {
+    width: 690px;
     position: relative;
     left: 10px;
-    height: 800px;
+    height: 600px;
 }
 
-.cartMovieItemContainer{
+.cartMovieItemContainer {
     display: block;
     background-color: #1E253A;
     border-radius: 5px;
@@ -14,28 +14,26 @@
     padding-bottom: 5%;
 }
 
-.movieDetailsCart{
+.movieDetailsCart {
     position: relative;
     left: 5px;
     top: 5px;
     font-size: 1.5em;
 }
 
-.movieItemSeatsContainer{
-    position:relative;
+.movieItemSeatsContainer {
+    position: relative;
     top: 20px;
     left: 5px;
-    /* border-style: dashed;
-    border-color: whitesmoke; */
 }
 
-.seatsTitle{
+.seatsTitle {
     font-weight: 500;
     font-size: 1.8em;
 }
 
 
-.cartItemSeatNumber{
+.cartItemSeatNumber {
     display: inline-block;
     font-size: 1.5em;
     width: 200px;
@@ -43,9 +41,89 @@
 }
 
 
-.cartItemSeatPrice{
+.cartItemSeatPrice {
     display: inline-block;
     font-size: 1.5em;
     width: 200px;
     padding: 2px;
-} 
+}
+
+.cartButtonContainer {
+    width: inherit;
+    text-align: center;
+    height: 90px;
+}
+
+.cartButton {
+    font-weight: 400;
+    font-size: 1.3em;
+    color: black;
+    background-color: gold;
+    border-style: none;
+    border-radius: 5px;
+    width: 200px;
+    position: relative;
+    top: 10px;
+}
+
+.checkoutContainer {
+    width: 300px;
+    position: relative;
+    left: 800px;
+    bottom: 621px;
+    background-color: #1E253A;
+    border-radius: 5px;
+}
+
+.checkoutContainer>.subtotalText {
+    display: inline-block;
+    width: 150px;
+    position: relative;
+    left: 5px;
+}
+
+.checkoutContainer>.subtotalValue {
+    display: inline-block;
+    width: 150px;
+    text-align: end;
+    position: relative;
+    right: 5px;
+}
+
+.checkoutContainer>.taxText {
+    display: inline-block;
+    width: 150px;
+    position: relative;
+    left: 5px;
+}
+
+.checkoutContainer>.taxValue {
+    display: inline-block;
+    width: 150px;
+    text-align: end;
+    position: relative;
+    right: 5px;
+
+}
+
+.checkoutContainer>.totalText {
+    display: inline-block;
+    width: 150px;
+    position: relative;
+    left: 5px;
+
+}
+
+.checkoutContainer>.totalValue {
+    display: inline-block;
+    width: 150px;
+    text-align: end;
+    position: relative;
+    right: 5px;
+}
+
+.bookTicketsButtonContainer {
+    width: inherit;
+    text-align: center;
+    height: 50px;
+}
