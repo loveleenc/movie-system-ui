@@ -34,12 +34,12 @@ const FilterDialog = ({
 
   const filterMovies = (event: FormEvent) => {
     event.preventDefault();
+    const releasedOnOrAfterDate = (event.target as HTMLFormElement).releaseOnOrAfter.value;
 
     const movieFilters: movieFilters = {
       genre: selectedGenre,
       language: selectedLanguages,
-      releasedOnOrAfter: (event.target as HTMLFormElement).releaseOnOrAfter
-        .value,
+      releasedOnOrAfter: releasedOnOrAfterDate !== '' ? releasedOnOrAfterDate : null,
     };
     movieService
       .getMoviesByFilter(movieFilters)

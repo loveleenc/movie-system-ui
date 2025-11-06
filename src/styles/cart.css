@@ -1,0 +1,51 @@
+.cartContainer{
+    width: 700px;
+    position: relative;
+    left: 10px;
+    height: 800px;
+}
+
+.cartMovieItemContainer{
+    display: block;
+    background-color: #1E253A;
+    border-radius: 5px;
+    width: 99%;
+    height: fit-content;
+    padding-bottom: 5%;
+}
+
+.movieDetailsCart{
+    position: relative;
+    left: 5px;
+    top: 5px;
+    font-size: 1.5em;
+}
+
+.movieItemSeatsContainer{
+    position:relative;
+    top: 20px;
+    left: 5px;
+    /* border-style: dashed;
+    border-color: whitesmoke; */
+}
+
+.seatsTitle{
+    font-weight: 500;
+    font-size: 1.8em;
+}
+
+
+.cartItemSeatNumber{
+    display: inline-block;
+    font-size: 1.5em;
+    width: 200px;
+    padding: 2px;
+}
+
+
+.cartItemSeatPrice{
+    display: inline-block;
+    font-size: 1.5em;
+    width: 200px;
+    padding: 2px;
+} 

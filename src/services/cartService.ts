@@ -1,8 +1,9 @@
 import axios, { type AxiosRequestConfig } from "axios"
+import type { Item } from "../types/cart";
 
 const baseUrl = "http://localhost:8080"
 
-const getCart = () => {
+const getCart = ():Promise<Item[]> => {
     return axios.get(`${baseUrl}/cart`, { withCredentials: true }).then(response => response.data);
 }
 
@@ -36,6 +37,23 @@ const addMultipleItemsToCart = async (tickets: string[]) => {
     return ticketsAddedToCart;
 }
 
+const removeItemFromCart = (itemId: string) => {
+    const csrfToken = document.cookie.replace(
+        /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1"
+    );
+    const requestConfig: AxiosRequestConfig = {
+        params: { itemId: itemId }, 
+        withCredentials: true, 
+        headers: {
+            "X-XSRF-TOKEN": csrfToken,
+        }
+    }
+    return axios.patch(`${baseUrl}/cart/remove`, {}, requestConfig);
+}
+
 export default {
-    addMultipleItemsToCart
+    addMultipleItemsToCart,
+    getCart,
+    removeItemFromCart
 } 

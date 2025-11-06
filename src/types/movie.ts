@@ -1,11 +1,11 @@
 export type Movie = {
     name: string;
-    duration: number;
-    poster: string;
-    genreList: string[];
-    languages: string[];
-    releaseDate: Date;
-    id: number
+    duration?: number;
+    poster?: string;
+    genreList?: string[];
+    languages?: string[];
+    releaseDate?: Date;
+    id?: number
 }
 
 export enum Language {

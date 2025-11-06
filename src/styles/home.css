@@ -4,6 +4,8 @@
     border-width: 5px;
     border-style: double;
     position: relative;
+    height: 300px;
+    display: flex;
 }
 
 .movie-sprite-container > .leftButton{

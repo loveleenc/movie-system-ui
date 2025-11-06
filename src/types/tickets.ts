@@ -1,3 +1,5 @@
+import type { Show } from "./show";
+
 export enum SeatStatus {
     AVAILABLE = 'available',
     BOOKED = 'booked',
@@ -36,4 +38,8 @@ export interface RowAndSeatNumber {
 
 export interface RowTypes {
   [key: string]: Seat[];
+}
+
+export interface TicketShow extends Ticket{
+    show: Show;
 }
