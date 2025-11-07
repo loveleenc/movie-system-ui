@@ -105,3 +105,10 @@
     top: 190px;
     font-size: 1.2em;
 }
+
+.userTicketContainer >.cancelBookingButton{
+    position: absolute;
+    left: 10px;
+    top: 185px;
+    font-size: 1.2em;
+}

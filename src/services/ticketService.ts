@@ -73,9 +73,24 @@ const getTicketsForUser = ():Promise<AxiosResponse<TicketShow[]>> => {
   });
 };
 
+const cancelBooking = (ticketId: string) => {
+  const csrfToken = document.cookie.replace(
+    /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  const requestConfig: AxiosRequestConfig = {
+    withCredentials: true,
+    headers: {
+      "X-XSRF-TOKEN": csrfToken,
+    }
+  }
+  return axios.patch(`${baseUrl}/tickets/cancel`, [ticketId], requestConfig);
+}
+
 export default {
   getTicketsForShow,
   getSeatRows,
   bookTickets,
-  getTicketsForUser
+  getTicketsForUser,
+  cancelBooking
 };

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SeatStatus, type TicketShow } from "../../types/tickets";
 import ticketService from "../../services/ticketService";
 import "../../styles/userTickets.css"
 import timeHelper from "../../utils/common";
+import NotificationDialog from "../Common/NotificationDialog";
 
-const UserTicket = ({ticket}: {ticket: TicketShow}) => {
+const UserTicket = ({ticket, onTicketCancellation}: {ticket: TicketShow; onTicketCancellation?: (ticketId:string) => void}) => {
     return (
         <div className="userTicketContainer commonFontColor">
             <div className="userTicketStatusText">Status</div>
@@ -20,6 +21,7 @@ const UserTicket = ({ticket}: {ticket: TicketShow}) => {
             <div className="movieDateAndTime">{timeHelper.getDate(ticket.show.startTime.toString())}, {timeHelper.getTimeInHHMM(ticket.show.startTime.toString())} - {timeHelper.getTimeInHHMM(ticket.show.endTime.toString())}</div>
             <div className="theatreName">{ticket.show.theatre.name}</div>
             <div className="theatreLocation">{ticket.show.theatre.location}</div>
+            {onTicketCancellation !== undefined ? <button onClick={() => (onTicketCancellation as (ticketId:string) => void)(ticket.id) } className="cancelBookingButton">Cancel booking</button> : ''}
         </div>
     )
 }
@@ -29,6 +31,8 @@ const UserTickets = () => {
     const [pastTickets, setPastTickets] = useState<TicketShow[]>([]);
     const [upcomingTickets, setUpcomingTickets] = useState<TicketShow[]>([]);
     const [displayPastTickets, setDisplayPastTickets] = useState<boolean>(false);
+    const [notification, setNotification] = useState<string>('');
+    const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
 
     useEffect(() => {
         ticketService.getTicketsForUser()
@@ -39,18 +43,34 @@ const UserTickets = () => {
             });
     }, []);
 
+    const onTicketCancellation = (ticketId:string) => {
+        ticketService.cancelBooking(ticketId)
+            .then(_response => {
+                setUpcomingTickets(upcomingTickets.filter(ticket => ticket.id !== ticketId));
+                notificationDialogRef.current?.showModal();
+                setNotification("Booked ticket cancelled successfully")
+            })
+            .catch(_error =>{
+                notificationDialogRef.current?.showModal();
+                setNotification("Unable to cancel booking.")
+            });
+
+    }
+
     return (
+
         <div className="profileItemViewContainer">
+        <NotificationDialog message={notification} dialogRef={notificationDialogRef}/>
             <div style={{'textAlign': 'center'}}>
                 <button onClick={() => setDisplayPastTickets(true)} className="ticketTypeText">Past</button>
                 <button onClick={() => setDisplayPastTickets(false)} className="ticketTypeText">Upcoming</button>
             </div>
             
             <div style={{display: displayPastTickets ? '' : 'none'}}>
-                {pastTickets.map(ticket => <UserTicket ticket={ticket} />)}
+                {pastTickets.map(ticket => <UserTicket ticket={ticket}/>)}
             </div>
             <div style={{display: displayPastTickets ? 'none' : ''}}>
-                {upcomingTickets.map(ticket => <UserTicket ticket={ticket} />)}
+                {upcomingTickets.map(ticket => <UserTicket ticket={ticket} onTicketCancellation={onTicketCancellation}/>)}
             </div>
         </div>
     )
