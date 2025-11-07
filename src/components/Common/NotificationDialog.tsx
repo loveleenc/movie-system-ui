@@ -10,7 +10,7 @@ const NotificationDialog = ({ message, dialogRef }: {
         <dialog ref={dialogRef}>
             <div className="">{message}</div>
             <form method="dialog">
-                <button onClick={() => dialogRef.current?.close()}>close</button>
+                <button onClick={() => dialogRef.current?.close()}>OK</button>
             </form>
         </dialog>
     )

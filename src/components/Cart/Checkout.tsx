@@ -1,6 +1,8 @@
 import type { Item } from "../../types/cart"
 
-const Checkout = ({items, displayCheckout}: {items: Item[]; displayCheckout: boolean}) => {
+const Checkout = ({items, displayCheckout, onBookingTickets}: {items: Item[]; displayCheckout: boolean; 
+    onBookingTickets: () => void
+}) => {
     const total = items.map(item => item.ticket.price).reduce((a, c) => a + c, 0);
     const tax = +(total * 0.05).toFixed(2);
 
@@ -15,7 +17,7 @@ const Checkout = ({items, displayCheckout}: {items: Item[]; displayCheckout: boo
             <h3 className="commonFontColor totalText">Total</h3>
             <h3 className="commonFontColor totalValue">{total + tax} &#8377;</h3>
             <div className="bookTicketsButtonContainer">
-                <button className="cartButton">Book tickets</button>
+                <button onClick={onBookingTickets} className="cartButton">Book tickets</button>
             </div>
         </div>
     )

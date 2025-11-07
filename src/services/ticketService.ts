@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import type {
   Ticket,
   RowAndSeatNumber,
@@ -52,7 +52,22 @@ const getSeatRows = (tickets: Ticket[]): RowTypes => {
   return rows;
 };
 
+const bookTickets = () => {
+  const csrfToken = document.cookie.replace(
+    /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  const requestConfig: AxiosRequestConfig = {
+    withCredentials: true,
+    headers: {
+      "X-XSRF-TOKEN": csrfToken,
+    }
+  }
+  return axios.patch(`${baseUrl}/tickets/book`, {}, requestConfig);
+}
+
 export default {
   getTicketsForShow,
   getSeatRows,
+  bookTickets
 };

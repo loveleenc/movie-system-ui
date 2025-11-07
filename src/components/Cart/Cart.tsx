@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Header from "../Header"
 import cartService from "../../services/cartService"
 import type { DisplayedItem, Item, ItemsByMovie } from "../../types/cart"
 import CartMovieItem from "./CartMovieItem"
 import "../../styles/cart.css"
 import Checkout from "./Checkout"
+import ticketService from "../../services/ticketService"
+import NotificationDialog from "../Common/NotificationDialog";
+import { useNavigate } from "react-router-dom"
 
 const createDisplayedItem = (item: Item): DisplayedItem => {
     return {
@@ -60,11 +63,16 @@ const parseCartData = (items: Item[]): ItemsByMovie[] => {
 const Cart = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [displayCheckout, setDisplayCheckout] = useState<boolean>(false);
+    const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
+    const [message, setMessage] = useState<string>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         cartService.getCart()
             .then(data => setItems(data));
     }, []);
+
+    useEffect(() => notificationDialogRef.current?.showModal(), [message]);
 
     const onRemovingItem = (event: React.SyntheticEvent) => {
         const id = (event.target as HTMLInputElement).id;
@@ -79,13 +87,32 @@ const Cart = () => {
     const onCheckout = () => {
         cartService.checkout()
             .then(_response => setDisplayCheckout(true))
-            .catch(error => console.log(error.getMessage())) //TODO:handle error
+            .catch(_error => {
+                setMessage("");
+                setMessage("Something went wrong during checkout. Selected tickets may no longer be available.")
+            }
+            )
     }
 
-    if(items.length == 0){
+    const onBookingTickets = () => {
+        ticketService.bookTickets()
+            .then(_response => {
+                setItems([]);
+                setDisplayCheckout(false);
+                setMessage("Tickets have been booked successfully! Redirecting to home...")
+                setTimeout(() => navigate("/"), 2000);
+            })
+            .catch(_error => {
+                setMessage("")
+                setMessage("Something went wrong while booking the tickets. Selected tickets may no longer be available.")
+            })
+    }
+
+    if (items.length == 0) {
         return (
             <>
                 <Header />
+                <NotificationDialog message={message} dialogRef={notificationDialogRef} />
                 <div className="cartContainer">
                     <h1 className="commonFontColor">Cart</h1>
                     <div className="commonFontColor">Cart is empty!</div>
@@ -102,10 +129,10 @@ const Cart = () => {
                 <hr />
                 {parseCartData(items).map((item, index) => <CartMovieItem key={index} item={item} onRemovingItem={onRemovingItem} />)}
                 <div className="cartButtonContainer">
-                    <button className="cartButton" onClick={onCheckout} style={{display: items.length !== 0 ? '' : 'none'}}>checkout</button>
+                    <button className="cartButton" onClick={onCheckout} style={{ display: items.length !== 0 ? '' : 'none' }}>checkout</button>
                 </div>
             </div>
-            <Checkout items={items} displayCheckout={displayCheckout}/>
+            <Checkout items={items} displayCheckout={displayCheckout} onBookingTickets={onBookingTickets}/>
         </>
     )
 }

@@ -8,7 +8,7 @@ import TheatreRow from "./TheatreRow";
 import TicketStatusLegend from "./TicketStatusLegend";
 import SelectionOverview from "./SelectionOverview";
 import cartService from "../../services/cartService";
-import NotificationDialog from "../Common/Notification";
+import NotificationDialog from "../Common/NotificationDialog";
 
 const Tickets = () => {
   const showId = useParams<string>().id as string;
