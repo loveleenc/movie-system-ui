@@ -1,0 +1,52 @@
+.profileContainer {
+    /* border-style: dashed; */
+    /* border-color: whitesmoke; */
+    /* border-width: 2px; */
+    height: 90vh;
+    position: relative;
+    left: 5px;
+}
+
+.profileMenuContainer {
+    height: inherit;
+    /* border-style: dashed; */
+    /* border-color: palevioletred; */
+    border-width: 2px;
+    border-radius: 5px;
+    width: 150px;
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    background-color: #1E253A;
+}
+
+.profileMenuButton {
+    width: inherit;
+    text-align: center;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    height: 30px;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    color: #fbf7f5;
+    border-radius: 5px;
+    border-style: none;
+    margin-bottom: 5px;
+}
+
+.profileItemViewContainer{
+    position: relative;
+    top: 0px;
+    width: calc((98vw - 160px));
+    left: 160px;
+    top: 5px;
+    border-radius: 5px;
+    background-color: #1E253A;
+    height: inherit;
+    /* border-style:groove; */
+    /* border-color: orangered; */
+    border-width: 2px;
+    overflow-y: scroll;
+    
+}

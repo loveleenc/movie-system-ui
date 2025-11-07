@@ -1,9 +1,10 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 import type {
   Ticket,
   RowAndSeatNumber,
   RowTypes,
   Seat,
+  TicketShow,
 } from "../types/tickets";
 
 const baseUrl: string = "http://localhost:8080";
@@ -66,8 +67,15 @@ const bookTickets = () => {
   return axios.patch(`${baseUrl}/tickets/book`, {}, requestConfig);
 }
 
+const getTicketsForUser = ():Promise<AxiosResponse<TicketShow[]>> => {
+  return axios.get(`${baseUrl}/user/tickets`, {
+    withCredentials: true,
+  });
+};
+
 export default {
   getTicketsForShow,
   getSeatRows,
-  bookTickets
+  bookTickets,
+  getTicketsForUser
 };

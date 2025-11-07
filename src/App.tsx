@@ -5,6 +5,7 @@ import MovieShows from "./components/Shows/MovieShows";
 import LoginPage from "./components/Login/LoginPage";
 import Tickets from "./components/Tickets/Tickets";
 import Cart from "./components/Cart/Cart";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
         <Route path="/user/login" element={<LoginPage />} />
         <Route path="/show/:id/tickets" element={<Tickets />} />
         <Route path="/user/cart" element={<Cart />} />
-        <Route path="/user/profile" element={<></>} />
+        <Route path="/user/profile" element={<Profile />} />
       </Routes>
       </BrowserRouter>
     </>

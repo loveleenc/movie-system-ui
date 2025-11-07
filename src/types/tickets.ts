@@ -3,6 +3,7 @@ import type { Show } from "./show";
 export enum SeatStatus {
     AVAILABLE = 'available',
     BOOKED = 'booked',
+    USED = 'used'
 }
 
 export enum SeatType {
@@ -23,6 +24,10 @@ export type Ticket = {
     seat: SeatData;
 }
 
+export interface TicketShow extends Ticket{
+    show: Show;
+}
+
 export type Seat = {
     status: SeatStatus;
     price: number;
@@ -40,6 +45,3 @@ export interface RowTypes {
   [key: string]: Seat[];
 }
 
-export interface TicketShow extends Ticket{
-    show: Show;
-}
