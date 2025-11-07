@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import userService from "../services/userService";
+import userService from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 const ProfileHeader = () => {
@@ -38,8 +38,8 @@ const Header = () => {
     <div className="headerContainer">
       <Link to="/" className="navigationBarButton">Home</Link>
       <Link className="navigationBarButton" to="/movies">Movies</Link>
-      <Link className="navigationBarButton" to="/theatres" >Theatres</Link>
-      <Link className="navigationBarButton" to="/shows" >Shows</Link>
+      {/* <Link className="navigationBarButton" to="/theatres" >Theatres</Link> */}
+      {/* <Link className="navigationBarButton" to="/shows" >Shows</Link> */}
       <ProfileHeader />
     </div>
   );

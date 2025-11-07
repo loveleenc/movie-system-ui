@@ -1,4 +1,4 @@
-import Header from "../Header"
+import Header from "../Common/Header"
 import "../../styles/profile.css"
 import ProfileMenu from "./ProfileMenu"
 import UserTickets from "./UserTickets"

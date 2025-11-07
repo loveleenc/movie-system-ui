@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import Header from "../Header"
+import Header from "../Common/Header"
 import cartService from "../../services/cartService"
 import type { DisplayedItem, Item, ItemsByMovie } from "../../types/cart"
 import CartMovieItem from "./CartMovieItem"

@@ -2,7 +2,7 @@ import MovieSprite from "../Common/MovieSprite";
 import { useState, useEffect, useRef } from "react";
 import type { Movie } from "../../types/movie";
 import movieService from "../../services/movieService";
-import Header from "../Header";
+import Header from "../Common/Header";
 import MovieFilter from "./MovieFilter";
 import MovieInformation from "../Common/MovieInformation";
 
@@ -41,6 +41,7 @@ const AllMovies = () => {
         </div>
         <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} />
         <div className="moviesContainer">
+          <div className={movies.length === 0 ? 'spinner' : ''}></div>
           {movies.map((movie, index) => (
             <MovieSprite key={index} movie={movie} onClickingSprite={onClickingMovie}/>
           ))}

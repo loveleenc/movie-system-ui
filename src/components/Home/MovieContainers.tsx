@@ -35,12 +35,12 @@ const MovieContainer = ({
       <>
         <h2 className="commonFontColor">{title}</h2>
         <div className="movie-sprite-container">
-          <div>No movies available at the moment. Please check later!</div>
+          <div className={movies.length === 0 ? 'spinner' : ''}></div>
         </div>
       </>
     );
   }
-
+  //No movies available at the moment. Please check later!
   return (
     <>
       <h2 className="commonFontColor">{title}</h2>

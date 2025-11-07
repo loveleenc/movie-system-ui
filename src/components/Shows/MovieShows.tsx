@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import showService from "../../services/showService";
 import type { ShowsByTheatre, ShowInformation } from "../../types/show";
-import Header from "../Header";
+import Header from "../Common/Header";
 
 const ShowWidget = ({
   show,

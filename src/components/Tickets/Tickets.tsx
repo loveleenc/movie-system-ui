@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import ticketService from "../../services/ticketService";
 import "./../../styles/seats.css";
-import Header from "../Header";
+import Header from "../Common/Header";
 import type { RowTypes, Seat } from "../../types/tickets";
 import TheatreRow from "./TheatreRow";
 import TicketStatusLegend from "./TicketStatusLegend";
