@@ -8,8 +8,8 @@ const NotificationDialog = ({ message, dialogRef }: {
 
     return (
         <dialog ref={dialogRef}>
-            <div className="">{message}</div>
-            <form method="dialog">
+            <div className="commonFontColor" style={{color: "black"}}>{message}</div>
+            <form method="dialog" style={{textAlign: "center"}}>
                 <button onClick={() => dialogRef.current?.close()}>OK</button>
             </form>
         </dialog>

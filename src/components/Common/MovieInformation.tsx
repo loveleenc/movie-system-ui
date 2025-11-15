@@ -12,10 +12,10 @@ const MovieInformation = ({movie, dialogRef}: {movie: Movie | null; dialogRef: R
         <dialog ref={dialogRef}>
             <img src={movie.poster} />
             <div>{movie.name}</div>
-            <div>Release Date: {movie.releaseDate.toString()}</div>
+            <div>Release Date: {(movie.releaseDate as Date).toString()}</div>
             <div>Duration: {movie.duration} min</div>
-            <div>Genre: {movie.genreList.toString()}</div>
-            <div>Languages: {movie.languages.toString()}</div>
+            <div>Genre: {(movie.genreList as string[]).toString()}</div>
+            <div>Languages: {(movie.languages as string[]).toString()}</div>
             <form method="dialog">
                 <div><Link to={`/movie/${movie.id}/shows`}><button>View Shows</button></Link></div>
                 <button onClick={() => dialogRef.current?.close()}>close</button>
