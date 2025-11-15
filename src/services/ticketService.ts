@@ -6,8 +6,9 @@ import type {
   Seat,
   TicketShow,
 } from "../types/tickets";
+import config from "../utils/config";
 
-const baseUrl: string = "http://localhost:8080";
+const baseUrl: string = config.BASE_URL;
 
 const getTicketsForShow = (showId: string) => {
   return axios.get(`${baseUrl}/tickets?showId=${showId}`, {

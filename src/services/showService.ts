@@ -1,7 +1,8 @@
 import axios from "axios";
 import type { Show, ShowsByTheatre } from "../types/show";
+import config from "../utils/config";
 
-const baseUrl: string = "http://localhost:8080";
+const baseUrl: string = config.BASE_URL;
 
 const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
   //TODO: refactor this crap

@@ -1,7 +1,8 @@
 import axios, { type AxiosRequestConfig } from "axios";
 import type { Movie, movieFilters } from "../types/movie";
+import config from "../utils/config";
 
-const baseUrl:string = "http://localhost:8080";
+const baseUrl:string = config.BASE_URL;
 
 const getAll = ():Promise<Movie[]> => {
     const config:AxiosRequestConfig = {

@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import config from "../utils/config";
 
-const baseUrl: string = "http://localhost:8080";
+const baseUrl: string = config.BASE_URL;
 
 const login = (username: string, password: string): Promise<AxiosResponse> => {
   const csrfToken = document.cookie.replace(

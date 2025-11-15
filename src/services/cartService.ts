@@ -1,7 +1,8 @@
 import axios, { type AxiosRequestConfig } from "axios"
 import type { Item } from "../types/cart";
+import config from "../utils/config";
 
-const baseUrl = "http://localhost:8080"
+const baseUrl = config.BASE_URL;
 
 const getCart = ():Promise<Item[]> => {
     return axios.get(`${baseUrl}/cart`, { withCredentials: true }).then(response => response.data);
