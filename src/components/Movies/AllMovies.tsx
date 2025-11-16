@@ -19,7 +19,11 @@ const AllMovies = () => {
     });
   }, []);
 
-  const onClickingMovie = (id:number) => {
+  const onClickingMovie = (id: number) => {
+    if (id === currentMovieId) {
+      movieDialogRef.current?.showModal();
+      return;
+    }
     setCurrentMovieId(id);
   }
 
@@ -27,8 +31,8 @@ const AllMovies = () => {
     movieDialogRef.current?.showModal();
   }, [currentMovieId])
 
-  const getMovie = ():Movie | null => {
-    const filteredMovies:Movie[] = movies.filter(movie => movie.id === currentMovieId)
+  const getMovie = (): Movie | null => {
+    const filteredMovies: Movie[] = movies.filter(movie => movie.id === currentMovieId)
     return filteredMovies.length === 0 ? null : filteredMovies[0];
   }
 
@@ -37,13 +41,13 @@ const AllMovies = () => {
       <Header />
       <div className="allMoviesContentContainer">
         <div className="movieFilterDialog">
-          <MovieFilter setMovies={setMovies} allMovies={allMovies}/>
+          <MovieFilter setMovies={setMovies} allMovies={allMovies} />
         </div>
         <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} />
         <div className="moviesContainer">
           <div className={movies.length === 0 ? 'spinner' : ''}></div>
           {movies.map((movie, index) => (
-            <MovieSprite key={index} movie={movie} onClickingSprite={onClickingMovie}/>
+            <MovieSprite key={index} movie={movie} onClickingSprite={onClickingMovie} />
           ))}
         </div>
       </div>

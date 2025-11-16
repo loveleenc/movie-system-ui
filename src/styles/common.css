@@ -15,12 +15,6 @@
   height: 280px;
 }
 
-.movie-sprite:hover {
-}
-
-.movie-sprite > span {
-}
-
 .movie-sprite > img {
   margin: auto;
 }

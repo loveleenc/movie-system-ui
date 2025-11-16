@@ -36,6 +36,10 @@ const MovieContainer = ({
     }
 
     const onClickingMovie = (id: number) => {
+        if(id === currentMovieId){
+            movieDialogRef.current?.showModal();
+            return;
+        }
         setCurrentMovieId(id);
     }
 
