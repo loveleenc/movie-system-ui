@@ -12,6 +12,12 @@ const getDate = (timestamp: string):string => {
     });
 }
 
+const getDuration = (minutes:number): string => {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return `${h}h ${m}m`;
+}
+
 const assertNever = (value: never) => {
   throw new Error(`Unhandled member: ${JSON.stringify(value)}`);
 };
@@ -19,5 +25,6 @@ const assertNever = (value: never) => {
 export default {
     getTimeInHHMM,
     getDate,
-    assertNever
+    assertNever,
+    getDuration
 }

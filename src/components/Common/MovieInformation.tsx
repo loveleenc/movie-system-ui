@@ -1,6 +1,17 @@
 import type React from "react";
 import type { Movie } from "../../types/movie"
 import { Link } from "react-router-dom";
+import common from "../../utils/common";
+
+const MovieDetails = ({details}: {details: string[] | undefined}) => {
+    return (
+        <div style={{paddingTop: '5px', paddingBottom: '5px'}}>
+                {details?.map(data => <div className="movie-genre-language">{data}</div>)}
+        </div>
+    )
+}
+
+
 
 //TODO: add styling for dialog
 const MovieInformation = ({movie, dialogRef}: {movie: Movie | null; dialogRef: React.RefObject<HTMLDialogElement | null>}) => {
@@ -9,17 +20,18 @@ const MovieInformation = ({movie, dialogRef}: {movie: Movie | null; dialogRef: R
         return <></>
     }
     return (
-        <dialog ref={dialogRef}>
+        <dialog ref={dialogRef} style={{textAlign: 'center'}} className="commonFontColor movie-information-dialog">
             <img src={movie.poster} />
-            <div>{movie.name}</div>
-            <div>Release Date: {(movie.releaseDate as Date).toString()}</div>
-            <div>Duration: {movie.duration} min</div>
-            <div>Genre: {(movie.genreList as string[]).toString()}</div>
-            <div>Languages: {(movie.languages as string[]).toString()}</div>
-            <form method="dialog">
-                <div><Link to={`/movie/${movie.id}/shows`}><button>View Shows</button></Link></div>
-                <button onClick={() => dialogRef.current?.close()}>close</button>
-                
+            <h4>{movie.name}</h4>
+            <div className="movie-info-inline">
+                <div>{common.getDate((movie.releaseDate as Date).toString())}</div>
+                <div>{common.getDuration(movie.duration as number)}</div>
+            </div>
+            <MovieDetails details={movie.genreList} />
+            <MovieDetails details={movie.languages} />
+            <form method="dialog" className="movie-info-inline">
+                <div><Link to={`/movie/${movie.id}/shows`} className="navigationBarButton">View Shows</Link></div>
+                <button className="navigationBarButton" onClick={() => dialogRef.current?.close()}>close</button>
             </form>
         </dialog>
     )

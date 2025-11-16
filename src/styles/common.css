@@ -78,3 +78,38 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+dialog::backdrop {
+        backdrop-filter: blur(10px);
+}
+
+.movie-information-dialog{
+  border-radius: 10px;
+  border-style: groove;
+  border-color: white;
+  background-color: #1E253A;
+  border-width: 5px;
+
+}
+
+.movie-information-dialog > img{
+  border-radius: 5px;
+}
+
+.movie-information-dialog > .movie-info-inline{
+  text-align: center;
+}
+
+.movie-info-inline > div{
+  display: inline-block;
+  width: 150px;
+
+}
+
+.movie-genre-language{
+    background-color: rgb(37, 45, 58);
+    border-radius: 8px;
+    padding: 3px;
+    display: inline-block;
+    width: 85px;
+}
