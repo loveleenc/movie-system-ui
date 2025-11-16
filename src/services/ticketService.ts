@@ -48,6 +48,7 @@ const getSeatRows = (tickets: Ticket[]): RowTypes => {
       rows[rowAndSeatNumber.row].push(seat);
     } else {
       rows[rowAndSeatNumber.row] = new Array();
+      rows[rowAndSeatNumber.row].push(seat);
     }
   }
   Object.values(rows).forEach((seatRow) => seatRow.sort((a, b) => a.number - b.number));

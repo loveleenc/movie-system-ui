@@ -74,27 +74,28 @@ const Tickets = () => {
       <h1 className="commonFontColor">Book seats</h1>
       <div>
         <NotificationDialog message="Cart shall exceed maximum capacity by adding the current items." dialogRef={notificationDialogRef}/>
-        <div className="screenDesign">SCREEN</div>
         <TicketStatusLegend />
-        <div className="seatRowsContainer">
+        <div className="theatreContainer">
           <div className="rowIdContainer">
-            {Object.keys(rows)
-              .sort()
-              .map((row) => (
-                <div className="rowId">{row}</div>
-              ))}
+              {Object.keys(rows)
+                .sort()
+                .map((row) => (
+                  <div className="rowId">{row}</div>
+                ))}
           </div>
-          <div className="seatContainer">
-            {Object.keys(rows)
-              .sort()
-              .map((row) => (
-                <>
-                  <TheatreRow seats={rows[row]} addOrRemoveSelection={addOrRemoveSelectedSeat} />
-                  <br />
-                </>
-              ))}
+          <div className="seatRowsContainer">
+            <div className="screenDesign">SCREEN</div>
+            <div className="seatContainer">
+              {Object.keys(rows)
+                .sort()
+                .map((row) => (
+                  <>
+                    <TheatreRow seats={rows[row]} addOrRemoveSelection={addOrRemoveSelectedSeat} />
+                    <br />
+                  </>
+                ))}
+            </div>
           </div>
-          <div style={{ display: 'inline-block', width: '100px', height: '100px' }}></div>
         </div>
         <SelectionOverview selectedSeats={getSelectedSeats(selectedTickets)} onAddingItemsToCart={onAddingItemsToCart}/>
 

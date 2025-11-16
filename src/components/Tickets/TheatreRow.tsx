@@ -6,13 +6,13 @@ const TheatreRow = ({ seats, addOrRemoveSelection }: { seats: SeatType[];
  }) => {
 
   return (
-    <>
+    <div className="rowContainer">
       {seats.map((seat) => (
         <>
         <Seat ticketId={seat.id} status={seat.status} addOrRemoveSelection={addOrRemoveSelection}/>
         </>
       ))}
-    </>
+    </div>
   );
 };
 
