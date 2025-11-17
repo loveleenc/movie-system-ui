@@ -49,15 +49,12 @@
   height: fit-content;
   width: fit-content;
   padding-top: 30px;
-  /* background-color: blueviolet; */
   position: relative;
-  /* border-style: dotted; */
   text-align: center;
   display: inline-block;
 }
 
 .rowContainer{
-  /* background-color: aqua; */
   height: 45px;
 }
 

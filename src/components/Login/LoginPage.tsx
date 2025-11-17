@@ -22,7 +22,7 @@ const LoginPage = () => {
                 setTimeout(() => navigate("/"), 1000);
             })
             .catch((error:AxiosError) => {
-                if(error.response?.status === 403){
+                if(error.response?.status === 401){
                     setNotification("Invalid username or password");
                     notificationDialogRef.current?.showModal();
                 }

@@ -8,7 +8,15 @@ const NowShowing = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    movieService.getNowShowing().then((data) => setMovies(data));
+    movieService.getNowShowing()
+      .then((data) => setMovies(data))
+      // .catch((_error) => {
+      //   const noMoviesAvailable:Movie = {
+      //     name: 'No Movies available',
+      //     id: 0,
+      //   }
+      //   setMovies([noMoviesAvailable])
+      // });
   }, []);
 
   return (
@@ -21,7 +29,15 @@ const NowShowing = () => {
 const ComingSoon = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
-    movieService.getUpcoming().then((data) => setMovies(data));
+    movieService.getUpcoming().
+    then((data) => setMovies(data))
+    // .catch((_error) => {
+    //     const noMoviesAvailable:Movie = {
+    //       name: 'No Movies available',
+    //       id: 0,
+    //     }
+    //     setMovies([noMoviesAvailable])
+    //   });
   }, []);
   return (
     <>
