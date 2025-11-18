@@ -1,5 +1,5 @@
 import Home from "./components/Home/Home";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  HashRouter, Route, Routes } from "react-router-dom";
 import AllMovies from "./components/Movies/AllMovies";
 import MovieShows from "./components/Shows/MovieShows";
 import LoginPage from "./components/Login/LoginPage";
@@ -10,7 +10,7 @@ import Profile from "./components/Profile/Profile";
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<AllMovies />} />
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/user/cart" element={<Cart />} />
         <Route path="/user/profile" element={<Profile />} />
       </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
