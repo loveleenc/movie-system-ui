@@ -16,3 +16,8 @@
     margin-right: auto;
 }
 
+.inputTextContainer {
+    display: inline-block;
+    width: 140px;
+    text-align:left;
+}

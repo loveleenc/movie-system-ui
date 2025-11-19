@@ -2,10 +2,11 @@ import Home from "./components/Home/Home";
 import {  HashRouter, Route, Routes } from "react-router-dom";
 import AllMovies from "./components/Movies/AllMovies";
 import MovieShows from "./components/Shows/MovieShows";
-import LoginPage from "./components/Login/LoginPage";
+import LoginPage from "./components/LoginSignup/LoginPage";
 import Tickets from "./components/Tickets/Tickets";
 import Cart from "./components/Cart/Cart";
 import Profile from "./components/Profile/Profile";
+import SignUp from "./components/LoginSignup/SignUp";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/show/:id/tickets" element={<Tickets />} />
         <Route path="/user/cart" element={<Cart />} />
         <Route path="/user/profile" element={<Profile />} />
+        <Route path="/user/signup" element={<SignUp />} />
       </Routes>
       </HashRouter>
     </>

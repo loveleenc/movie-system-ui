@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react"
 import userService from "../../services/userService";
 import { AxiosError, type AxiosResponse } from "axios"
 import Header from "../Common/Header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotificationDialog from "../Common/NotificationDialog";
-import "../../styles/login.css"
+import "../../styles/loginSignUp.css"
 
 const LoginPage = () => {
     const [username, setUsername] = useState<string>('');
@@ -45,6 +45,7 @@ const LoginPage = () => {
                 </div>
                 <div>password: <input className="loginInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
                 <button className="navigationBarButton" type="submit">Login</button>
+                <div>New User? <Link to="/user/signup">Sign up</Link></div>
             </form>
         </div>
         </>
