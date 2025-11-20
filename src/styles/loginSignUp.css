@@ -21,3 +21,8 @@
     width: 140px;
     text-align:left;
 }
+
+.newUserSignupText{
+    text-decoration: none;
+    color: orangered;
+}

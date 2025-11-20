@@ -4,6 +4,7 @@ import ticketService from "../../services/ticketService";
 import "../../styles/userTickets.css"
 import timeHelper from "../../utils/common";
 import NotificationDialog from "../Common/NotificationDialog";
+import { AxiosError } from "axios";
 
 const UserTicket = ({ticket, onTicketCancellation}: {ticket: TicketShow; onTicketCancellation?: (ticketId:string) => void}) => {
     return (
@@ -33,6 +34,13 @@ const UserTickets = () => {
     const [displayPastTickets, setDisplayPastTickets] = useState<boolean>(false);
     const [notification, setNotification] = useState<string>('');
     const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
+    const [notificationCounter, setNotificationCounter] = useState<number>(0);
+
+    useEffect(() => {
+            if(notification !== ""){
+                notificationDialogRef.current?.showModal();
+            }
+    }, [notificationCounter])
 
     useEffect(() => {
         ticketService.getTicketsForUser()
@@ -40,21 +48,24 @@ const UserTickets = () => {
                 const tickets = response.data;
                 setUpcomingTickets(tickets.filter(ticket => ticket.status === SeatStatus.BOOKED));
                 setPastTickets(tickets.filter(ticket => ticket.status !== SeatStatus.BOOKED));
-            });
+            })
+            .catch((_error:AxiosError) => {
+                setNotification("Unable to fetch details at the moment. Please try later");
+                setNotificationCounter(notificationCounter + 1);
+            })
+        
     }, []);
 
     const onTicketCancellation = (ticketId:string) => {
         ticketService.cancelBooking(ticketId)
             .then(_response => {
                 setUpcomingTickets(upcomingTickets.filter(ticket => ticket.id !== ticketId));
-                notificationDialogRef.current?.showModal();
                 setNotification("Booked ticket cancelled successfully")
             })
             .catch(_error =>{
-                notificationDialogRef.current?.showModal();
                 setNotification("Unable to cancel booking.")
             });
-
+            setNotificationCounter(notificationCounter + 1);
     }
 
     return (

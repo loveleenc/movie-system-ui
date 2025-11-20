@@ -7,11 +7,12 @@ import Tickets from "./components/Tickets/Tickets";
 import Cart from "./components/Cart/Cart";
 import Profile from "./components/Profile/Profile";
 import SignUp from "./components/LoginSignup/SignUp";
+import Activate from "./components/LoginSignup/Activate";
 
 const App = () => {
   return (
     <>
-      <HashRouter basename="/">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<AllMovies />} />
@@ -21,8 +22,9 @@ const App = () => {
         <Route path="/user/cart" element={<Cart />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/signup" element={<SignUp />} />
+        <Route path="/user/activate/:id" element={<Activate />} />
       </Routes>
-      </HashRouter>
+    </HashRouter>
     </>
   );
 };

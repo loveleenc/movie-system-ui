@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import userService from "../../services/userService";
 import { AxiosError, type AxiosResponse } from "axios"
 import Header from "../Common/Header";
@@ -11,6 +11,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState<string>('');
     const [notification, setNotification] = useState<string>('');
     const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
+    const [notificationCounter, setNotificationCounter] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -19,20 +20,27 @@ const LoginPage = () => {
         userService.login(username, password)
             .then((_response:AxiosResponse) => {
                 setNotification("Login was successful. Redirecting...");
-                setTimeout(() => navigate("/"), 1000);
+                setTimeout(() => navigate("/"), 2000);
             })
             .catch((error:AxiosError) => {
                 if(error.response?.status === 401){
                     setNotification("Invalid username or password");
-                    notificationDialogRef.current?.showModal();
+                }
+                else if(!error.response){
+                setNotification("Something has gone wrong. Please check your internet connection");
                 }
                 else{
                     setNotification("Unable to login at the moment. Please try later.")
-                    notificationDialogRef.current?.showModal();
                 }
             })
+            setNotificationCounter(notificationCounter + 1);
     }
 
+    useEffect(() => {
+        if(notification !== ""){
+            notificationDialogRef.current?.showModal();
+        }
+    }, [notificationCounter])
 
     return (
         <>
@@ -45,7 +53,7 @@ const LoginPage = () => {
                 </div>
                 <div>password: <input className="loginInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
                 <button className="navigationBarButton" type="submit">Login</button>
-                <div>New User? <Link to="/user/signup">Sign up</Link></div>
+                <div>New User? <Link className="newUserSignupText" to="/user/signup">Sign up</Link></div>
             </form>
         </div>
         </>

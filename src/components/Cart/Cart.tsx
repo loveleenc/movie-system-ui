@@ -64,6 +64,7 @@ const Cart = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [displayCheckout, setDisplayCheckout] = useState<boolean>(false);
     const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
+    const [notificationCounter, setNotificationCounter] = useState<number>(0);
     const [message, setMessage] = useState<string>('');
     const navigate = useNavigate();
 
@@ -72,7 +73,11 @@ const Cart = () => {
             .then(data => setItems(data));
     }, []);
 
-    useEffect(() => notificationDialogRef.current?.showModal(), [message]);
+    useEffect(() => {
+        if(message !== ""){
+            notificationDialogRef.current?.showModal()
+        }
+    }, [notificationCounter]);
 
     const onRemovingItem = (event: React.SyntheticEvent) => {
         const id = (event.target as HTMLInputElement).id;
@@ -88,10 +93,10 @@ const Cart = () => {
         cartService.checkout()
             .then(_response => setDisplayCheckout(true))
             .catch(_error => {
-                setMessage("");
                 setMessage("Something went wrong during checkout. Selected tickets may no longer be available.")
             }
             )
+            setNotificationCounter(notificationCounter + 1);
     }
 
     const onBookingTickets = () => {
@@ -103,9 +108,9 @@ const Cart = () => {
                 setTimeout(() => navigate("/"), 2000);
             })
             .catch(_error => {
-                setMessage("")
                 setMessage("Something went wrong while booking the tickets. Selected tickets may no longer be available.")
             })
+            setNotificationCounter(notificationCounter + 1);
     }
 
     if (items.length == 0) {

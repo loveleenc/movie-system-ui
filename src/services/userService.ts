@@ -4,6 +4,10 @@ import { NewUser } from "../types/user";
 
 const baseUrl: string = config.BASE_URL;
 
+const activateUserAccount = (id:string):Promise<AxiosResponse> => {
+  return axios.patch(`${baseUrl}/user/activate/${id}`, {})
+}
+
 const register = (newUser:NewUser):Promise<AxiosResponse> => {
   const csrfToken = document.cookie.replace(
     /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
@@ -62,5 +66,6 @@ export default {
   login,
   userIsLoggedIn,
   logout,
-  register
+  register,
+  activateUserAccount
 };

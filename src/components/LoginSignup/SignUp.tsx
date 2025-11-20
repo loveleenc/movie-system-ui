@@ -17,6 +17,7 @@ const SignUp = () => {
     const [userEmail, setUserEmail]= useState<string>('');
     const [userTypes, setUserTypes] = useState<AccountType[]>([]);
     const [notification, setNotification] = useState<string>('');
+    const [notificationCounter, setNotificationCounter] = useState<number>(0);
     const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
 
     const onChangingUserType = (event: React.ChangeEvent<UserTypeHTMLInputElement>) => {
@@ -36,6 +37,7 @@ const SignUp = () => {
             username: username,
             password: password,
             email: userEmail,
+            roles: userTypes,
         }
 
         userService.register(newUser)
@@ -46,17 +48,21 @@ const SignUp = () => {
             if(error.response?.status === 400){
                 setNotification("Unable to create an account. Please check the entered details, or username or e-mail may have already been used.");
             }
+            else if(!error.response){
+                setNotification("Something has gone wrong. Please check your internet connection");
+            }
             else{
                 setNotification(error.response?.data as string);
             }
         })
+        setNotificationCounter(notificationCounter + 1);
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         if(notification !== ""){
             notificationDialogRef.current?.showModal()
         }
-    }, [notification]);
+    }, [notificationCounter]);
 
     return (
         <>

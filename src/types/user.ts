@@ -4,6 +4,7 @@ export type NewUser = {
     username: string;
     password: string;
     email: string;
+    roles: AccountType[];
 }
 
 export enum AccountType {

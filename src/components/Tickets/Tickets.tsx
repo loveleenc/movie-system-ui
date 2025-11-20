@@ -15,6 +15,17 @@ const Tickets = () => {
   const [rows, setRows] = useState<RowTypes | null>(null);
   const [selectedTickets, setSelectedTickets] = useState<string[]>([]);
   const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
+  const [notification, setNotification] = useState<string>('');
+  const [notificationCounter, setNotificationCounter] = useState<number>(0);
+
+
+
+  useEffect(() => {
+            if(notification !== ""){
+                notificationDialogRef.current?.showModal();
+            }
+    }, [notificationCounter])
+
 
   useEffect(() => {
     ticketService.getTicketsForShow(showId).then((response) => {
@@ -49,7 +60,8 @@ const Tickets = () => {
       await cartService.addMultipleItemsToCart(selectedTickets);
     }
     catch (error) {
-      notificationDialogRef.current?.showModal();
+      setNotification("Unable to add item to the cart. Ticket may no longer be available, or cart may be full.")
+      setNotificationCounter(notificationCounter + 1)
       //TODO: display cart capacity exceeded
     }
   }
@@ -73,7 +85,7 @@ const Tickets = () => {
       <Header />
       <h1 className="commonFontColor">Book seats</h1>
       <div>
-        <NotificationDialog message="Cart shall exceed maximum capacity by adding the current items." dialogRef={notificationDialogRef}/>
+        <NotificationDialog message={notification} dialogRef={notificationDialogRef}/>
         <TicketStatusLegend />
         <div className="theatreContainer">
           <div className="rowIdContainer">
