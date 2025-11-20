@@ -94,9 +94,10 @@ const Cart = () => {
             .then(_response => setDisplayCheckout(true))
             .catch(_error => {
                 setMessage("Something went wrong during checkout. Selected tickets may no longer be available.")
+                setNotificationCounter(notificationCounter + 1);
             }
             )
-            setNotificationCounter(notificationCounter + 1);
+            
     }
 
     const onBookingTickets = () => {
@@ -106,11 +107,13 @@ const Cart = () => {
                 setDisplayCheckout(false);
                 setMessage("Tickets have been booked successfully! Redirecting to home...")
                 setTimeout(() => navigate("/"), 2000);
+                setNotificationCounter(notificationCounter + 1);
             })
             .catch(_error => {
                 setMessage("Something went wrong while booking the tickets. Selected tickets may no longer be available.")
+                setNotificationCounter(notificationCounter + 1);
             })
-            setNotificationCounter(notificationCounter + 1);
+            
     }
 
     if (items.length == 0) {

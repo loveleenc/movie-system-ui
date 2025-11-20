@@ -61,11 +61,12 @@ const UserTickets = () => {
             .then(_response => {
                 setUpcomingTickets(upcomingTickets.filter(ticket => ticket.id !== ticketId));
                 setNotification("Booked ticket cancelled successfully")
+                setNotificationCounter(notificationCounter + 1);
             })
             .catch(_error =>{
                 setNotification("Unable to cancel booking.")
+                setNotificationCounter(notificationCounter + 1);
             });
-            setNotificationCounter(notificationCounter + 1);
     }
 
     return (

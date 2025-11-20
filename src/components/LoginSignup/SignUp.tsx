@@ -43,6 +43,7 @@ const SignUp = () => {
         userService.register(newUser)
         .then((_response:AxiosResponse) => {
             setNotification("Account has been created successfully! Please check your e-mail and follow the instructions to activate your account.");
+            setNotificationCounter(notificationCounter + 1);
         })
         .catch((error:AxiosError) => {
             if(error.response?.status === 400){
@@ -54,8 +55,9 @@ const SignUp = () => {
             else{
                 setNotification(error.response?.data as string);
             }
+            setNotificationCounter(notificationCounter + 1);
         })
-        setNotificationCounter(notificationCounter + 1);
+        
     }
 
     useEffect(() => {

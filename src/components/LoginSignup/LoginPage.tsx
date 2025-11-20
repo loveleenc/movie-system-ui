@@ -20,6 +20,7 @@ const LoginPage = () => {
         userService.login(username, password)
             .then((_response:AxiosResponse) => {
                 setNotification("Login was successful. Redirecting...");
+                setNotificationCounter(notificationCounter + 1);
                 setTimeout(() => navigate("/"), 2000);
             })
             .catch((error:AxiosError) => {
@@ -32,8 +33,9 @@ const LoginPage = () => {
                 else{
                     setNotification("Unable to login at the moment. Please try later.")
                 }
+                setNotificationCounter(notificationCounter + 1);
             })
-            setNotificationCounter(notificationCounter + 1);
+            
     }
 
     useEffect(() => {
