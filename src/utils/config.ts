@@ -1,5 +1,5 @@
 
-let BASE_URL:string = "http://localhost:8080/api";
+let BASE_URL:string = "/api";
 
 export default {
     BASE_URL
