@@ -10,18 +10,11 @@ const NowShowing = () => {
   useEffect(() => {
     movieService.getNowShowing()
       .then((data) => setMovies(data))
-      // .catch((_error) => {
-      //   const noMoviesAvailable:Movie = {
-      //     name: 'No Movies available',
-      //     id: 0,
-      //   }
-      //   setMovies([noMoviesAvailable])
-      // });
   }, []);
 
   return (
     <>
-      <MovieContainer movies={movies} title="Now Showing" />
+      <MovieContainer movies={movies} title="Now Showing" comingSoon={false}/>
     </>
   );
 };
@@ -41,7 +34,7 @@ const ComingSoon = () => {
   }, []);
   return (
     <>
-      <MovieContainer movies={movies} title="Coming Soon" />
+      <MovieContainer movies={movies} title="Coming Soon" comingSoon={true}/>
     </>
   );
 };

@@ -12,7 +12,7 @@ const MovieDetails = ({ details }: { details: string[] | undefined }) => {
 }
 
 
-const MovieInformation = ({ movie, dialogRef }: { movie: Movie | null; dialogRef: React.RefObject<HTMLDialogElement | null> }) => {
+const MovieInformation = ({ movie, dialogRef, comingSoon }: { comingSoon:boolean; movie: Movie | null; dialogRef: React.RefObject<HTMLDialogElement | null> }) => {
 
     if (movie === null) {
         return <></>
@@ -28,7 +28,7 @@ const MovieInformation = ({ movie, dialogRef }: { movie: Movie | null; dialogRef
             <MovieDetails details={movie.genreList} />
             <MovieDetails details={movie.languages} />
             <form method="dialog" className="movie-info-inline">
-                <div><Link to={`/movie/${movie.id}/shows`} className="navigationBarButton">View Shows</Link></div>
+                {comingSoon ? "" : <div><Link to={`/movie/${movie.id}/shows`} className="navigationBarButton">View Shows</Link></div>}
                 <button className="navigationBarButton" onClick={() => dialogRef.current?.close()}>close</button>
             </form>
         </dialog>

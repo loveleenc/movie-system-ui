@@ -22,9 +22,11 @@ const getMovieSubset = (movies: Movie[], currentIndex: number): Movie[] => {
 const MovieContainer = ({
     movies,
     title,
+    comingSoon
 }: {
     movies: Movie[];
     title: string;
+    comingSoon: boolean;
 }) => {
     const [currentMovieId, setCurrentMovieId] = useState<number>(0);
     const movieDialogRef = useRef<HTMLDialogElement | null>(null);
@@ -74,7 +76,7 @@ const MovieContainer = ({
             <h2 className="commonFontColor">{title}</h2>
             <div className="movie-button-sprite-container">
                 <div className="movie-sprite-container">
-                    <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} />
+                    <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} comingSoon={comingSoon}/>
                     {
                         getMovieSubset(movies, currentIndex)
                             .map((movie, index) => (
