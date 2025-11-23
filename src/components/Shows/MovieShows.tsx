@@ -22,10 +22,13 @@ const ShowWidget = ({
   return (
     <>
       <div>
-        <span>{show.date}</span>
-        <span>
-          {show.startTime} - {show.endTime}
-        </span>
+        <div style={{display: 'inline-block', paddingRight: '10px'}}>
+          <span>{show.date}, </span>
+          <span>
+            {show.startTime} - {show.endTime}
+          </span>
+        </div>
+        
         <button onClick={() => navigateToTickets(show.id)}>Book seats</button>
       </div>
     </>
@@ -40,7 +43,7 @@ const TheatreWidget = ({
   ticketNavFunction: NavigateFunction;
 }) => {
   return (
-    <>
+    <div className="commonFontColor">
       <h2>{theatre.location}</h2>
       <h3>{theatre.name}</h3>
       {theatre.languages.map((language) => (
@@ -51,7 +54,7 @@ const TheatreWidget = ({
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
