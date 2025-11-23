@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ticketService from "../../services/ticketService";
 import "./../../styles/seats.css";
 import Header from "../Common/Header";
-import type { RowTypes, Seat } from "../../types/tickets";
+import { SeatStatus, type RowTypes, type Seat } from "../../types/tickets";
 import TheatreRow from "./TheatreRow";
 import TicketStatusLegend from "./TicketStatusLegend";
 import SelectionOverview from "./SelectionOverview";
@@ -21,10 +21,10 @@ const Tickets = () => {
 
 
   useEffect(() => {
-            if(notification !== ""){
-                notificationDialogRef.current?.showModal();
-            }
-    }, [notificationCounter])
+    if (notification !== "") {
+      notificationDialogRef.current?.showModal();
+    }
+  }, [notificationCounter])
 
 
   useEffect(() => {
@@ -58,11 +58,25 @@ const Tickets = () => {
   const onAddingItemsToCart = async () => {
     try {
       await cartService.addMultipleItemsToCart(selectedTickets);
+      const newRows = {
+        ...rows
+      };
+      const theatreRows = Object.values(newRows as RowTypes);
+      for (let i = 0; i < theatreRows.length; i++) {
+        theatreRows[i].forEach(seat => {
+          if(selectedTickets.includes(seat.id)){
+            seat.status = SeatStatus.BOOKED;
+          }
+        } )
+      }
+      setRows(newRows);
+      setSelectedTickets([])
+      setNotification("Tickets added to cart.")
+      setNotificationCounter(notificationCounter + 1)
     }
     catch (error) {
       setNotification("Unable to add item to the cart. Ticket may no longer be available, or cart may be full.")
       setNotificationCounter(notificationCounter + 1)
-      //TODO: display cart capacity exceeded
     }
   }
 
@@ -85,15 +99,15 @@ const Tickets = () => {
       <Header />
       <h1 className="commonFontColor">Book seats</h1>
       <div>
-        <NotificationDialog message={notification} dialogRef={notificationDialogRef}/>
+        <NotificationDialog message={notification} dialogRef={notificationDialogRef} />
         <TicketStatusLegend />
         <div className="theatreContainer">
           <div className="rowIdContainer">
-              {Object.keys(rows)
-                .sort()
-                .map((row) => (
-                  <div className="rowId">{row}</div>
-                ))}
+            {Object.keys(rows)
+              .sort()
+              .map((row) => (
+                <div className="rowId">{row}</div>
+              ))}
           </div>
           <div className="seatRowsContainer">
             <div className="screenDesign">SCREEN</div>
@@ -109,7 +123,7 @@ const Tickets = () => {
             </div>
           </div>
         </div>
-        <SelectionOverview selectedSeats={getSelectedSeats(selectedTickets)} onAddingItemsToCart={onAddingItemsToCart}/>
+        <SelectionOverview selectedSeats={getSelectedSeats(selectedTickets)} onAddingItemsToCart={onAddingItemsToCart} />
 
       </div>
     </>
