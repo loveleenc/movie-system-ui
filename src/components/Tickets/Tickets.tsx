@@ -9,6 +9,7 @@ import TicketStatusLegend from "./TicketStatusLegend";
 import SelectionOverview from "./SelectionOverview";
 import cartService from "../../services/cartService";
 import NotificationDialog from "../Common/NotificationDialog";
+import { AxiosError } from "axios";
 
 const Tickets = () => {
   const showId = useParams<string>().id as string;
@@ -28,10 +29,19 @@ const Tickets = () => {
 
 
   useEffect(() => {
-    ticketService.getTicketsForShow(showId).then((response) => {
+    ticketService.getTicketsForShow(showId)
+    .then((response) => {
       const seatRows = ticketService.getSeatRows(response.data);
       setRows(seatRows);
-    });
+    })
+    .catch((error:AxiosError) => {
+      if(error.response?.status === 401){
+        setNotification("Please login to view and book seats")
+      }
+      else{
+        setNotification("No information available at for this show. Please try again later.")
+      }
+    })
   }, []);
 
 
@@ -84,12 +94,15 @@ const Tickets = () => {
     return (
       <>
         <Header />
-        <h1>Book seats</h1>
+        <div className="commonFontColor">
+        <h1 >Book seats</h1>
         <div>
           {
-            //Todo: show that tickets are not available at the moment.
+            notification
           }
         </div>
+        </div>
+        
       </>
     );
   }
