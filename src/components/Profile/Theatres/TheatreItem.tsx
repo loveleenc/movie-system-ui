@@ -3,12 +3,6 @@ import { Theatre } from "../../../types/theatre"
 
 const TheatreItem = ({theatre, setTheatreId}: {theatre: Theatre; setTheatreId: React.Dispatch<React.SetStateAction<number>>}) => {
 
-    const dosmth = () => {
-        console.log("clicked the button in theatreitem")
-         ;
-    }
-
-
     return (
         <div className="profileItemContainer">
             <h2 className="itemDetails commonFontColor">{theatre.name}</h2>
