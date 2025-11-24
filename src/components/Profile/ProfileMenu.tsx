@@ -36,10 +36,10 @@ const ProfileMenu = ({ onClickChangeSelection }: { onClickChangeSelection: (item
             })
         }
         if(localStorage.getItem(AccountType.THEATRE_OWNER) === "true"){
-            MenuItems.push({
-                buttonText: "Shows",
-                element: ProfileItems.SHOWS
-            })
+            // MenuItems.push({
+            //     buttonText: "Shows",
+            //     element: ProfileItems.SHOWS
+            // })
             MenuItems.push({
                 buttonText: 'Theatres',
                 element: ProfileItems.THEATRES,

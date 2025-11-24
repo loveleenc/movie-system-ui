@@ -76,6 +76,13 @@
     font-size: 1.2em;
 }
 
+.profileItemContainer > .viewShowsButton{
+    position: relative;
+    left: 5px;
+    top: 5px;
+    font-size: 1.2em;
+}
+
 .profileItemButton{
     width: 200px;
     text-align: center;

@@ -4,7 +4,7 @@ import { NewTheatre, Theatre, TheatreRow } from "../../../types/theatre";
 import TheatreItem from "./TheatreItem";
 import NewTheatreDialog from "./NewTheatreDialog";
 
-const UserTheatres = () => {
+const UserTheatres = ({theatreId, setTheatreId}: {theatreId:number; setTheatreId: React.Dispatch<React.SetStateAction<number>>}) => {
     const [theatres, setTheatres] = useState<Theatre[]>([]);
     const newTheatreDialogRef = useRef<HTMLDialogElement | null>(null);
     useEffect(() => {
@@ -44,15 +44,16 @@ const UserTheatres = () => {
             })
     }
 
+    console.log(`value of theatreid is ${theatreId}`)
     return (
-        <div className="profileItemViewContainer">
+        <div style={{display: theatreId !== 0 ? 'none' : ''}} className="profileItemViewContainer">
             <NewTheatreDialog dialogRef={newTheatreDialogRef} createNewTheatre={createNewTheatre}/>
             <div>
                 <h1 className="commonFontColor">Theatres</h1>
                 <button onClick={() => newTheatreDialogRef.current?.showModal()} className="profileItemButton">Add theatre</button>
             </div>
             <hr />
-            {theatres.map((theatre, index) => <TheatreItem key={index} theatre={theatre} />)}
+            {theatres.map((theatre, index) => <TheatreItem key={index} theatre={theatre} setTheatreId={setTheatreId}/>)}
         </div>
     )
 }

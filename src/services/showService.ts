@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { Show, ShowsByTheatre } from "../types/show";
 import config from "../utils/config";
 
@@ -70,15 +70,33 @@ const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
       };
       showsByTheatre.push(newTheatre);
     }
-    // return {
-    //   ...show,
-    //   startTime: new Date(show.startTime),
-    //   endTime: new Date(show.endTime),
-    // };
   });
   return showsByTheatre;
 };
 
+const getShowsForTheatre = (theatreId: number):Promise<AxiosResponse<Show[]>> => {
+
+  return axios.get(`${baseUrl}/theatre/${theatreId}/shows`, { withCredentials: true });
+}
+
+const cancelShow = (id: string) => {
+  const csrfToken = document.cookie.replace(
+          /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+          "$1"
+      );
+      const requestConfig: AxiosRequestConfig = {
+          params: { showId: id }, 
+          withCredentials: true, 
+          headers: {
+              "X-XSRF-TOKEN": csrfToken,
+          }
+      }
+  return axios.patch(`${baseUrl}/show/cancel`, {}, requestConfig);
+}
+
+
 export default {
   getShowsForMovie,
+  getShowsForTheatre,
+  cancelShow
 };

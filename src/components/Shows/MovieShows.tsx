@@ -50,7 +50,7 @@ const TheatreWidget = ({
         <div>
           <div>{language.language}</div>
           {language.shows.map((show, index) => (
-            <ShowWidget key={index} show={show} ticketNavFunction={ticketNavFunction} />
+            <ShowWidget key={`show${index}`} show={show} ticketNavFunction={ticketNavFunction} />
           ))}
         </div>
       ))}

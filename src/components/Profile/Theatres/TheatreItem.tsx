@@ -1,12 +1,19 @@
 import { Theatre } from "../../../types/theatre"
 
 
-const TheatreItem = ({theatre}: {theatre: Theatre}) => {
+const TheatreItem = ({theatre, setTheatreId}: {theatre: Theatre; setTheatreId: React.Dispatch<React.SetStateAction<number>>}) => {
+
+    const dosmth = () => {
+        console.log("clicked the button in theatreitem")
+         ;
+    }
+
 
     return (
         <div className="profileItemContainer">
             <h2 className="itemDetails commonFontColor">{theatre.name}</h2>
             <div className="itemDetails commonFontColor">{theatre.location}</div>
+            <button className="itemDetails viewShowsButton" onClick={() => setTheatreId(theatre.id)}>View Shows</button>
         </div>
     )
 }
