@@ -39,7 +39,7 @@
     position: relative;
     top: 0px;
     width: calc((98vw - 160px));
-    left: 160px;
+    left: 170px;
     top: 5px;
     border-radius: 5px;
     background-color: #1E253A;
@@ -48,5 +48,44 @@
     /* border-color: orangered; */
     border-width: 2px;
     overflow-y: scroll;
+    /* background-color: pink; */
     
+}
+
+.profileItemViewContainer > div> h1{
+    display: inline-block;
+    width: 250px;
+    padding-left: 10px;
+}
+
+.profileItemContainer{
+    display: block;
+    background-color: #1E253A;
+    border-radius: 5px;
+    width: 300px;
+    height: fit-content;
+    padding-bottom: 2%;
+    margin-left: 10px;
+    /* background-color: orange; */
+}
+
+.profileItemContainer > .itemDetails{
+    position: relative;
+    left: 5px;
+    top: 5px;
+    font-size: 1.2em;
+}
+
+.profileItemButton{
+    width: 200px;
+    text-align: center;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    height: 30px;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    color: #fbf7f5;
+    border-radius: 5px;
+    border-style: groove;
 }

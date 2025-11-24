@@ -11,3 +11,8 @@ export enum AccountType {
     REGULAR_USER = "regularUser",
     THEATRE_OWNER = "theatreOwner"
 }
+
+export type UserInfo = {
+    name: string;
+    roles: AccountType[];
+}

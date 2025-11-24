@@ -3,6 +3,12 @@
   color:#fbf7f5;
 }
 
+.commonInput{
+    border-radius: 5px; 
+    border: 2px solid;
+    font-size: 16px;
+}
+
 .movie-sprite {
   display: inline-block;
   border-radius: 10px;

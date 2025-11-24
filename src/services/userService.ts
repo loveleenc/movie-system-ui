@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 import config from "../utils/config";
-import { NewUser } from "../types/user";
+import { NewUser, UserInfo } from "../types/user";
 
 const baseUrl: string = config.BASE_URL;
 
@@ -28,7 +28,7 @@ const register = (newUser:NewUser):Promise<AxiosResponse> => {
   );
 }
 
-const login = (username: string, password: string): Promise<AxiosResponse> => {
+const login = (username: string, password: string): Promise<AxiosResponse<UserInfo>> => {
   const csrfToken = document.cookie.replace(
     /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
     "$1"

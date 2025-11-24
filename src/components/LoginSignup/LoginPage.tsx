@@ -5,6 +5,7 @@ import Header from "../Common/Header";
 import { Link, useNavigate } from "react-router-dom";
 import NotificationDialog from "../Common/NotificationDialog";
 import "../../styles/loginSignUp.css"
+import { UserInfo } from "../../types/user";
 
 const LoginPage = () => {
     const [username, setUsername] = useState<string>('');
@@ -18,7 +19,12 @@ const LoginPage = () => {
     const onLogin = (event: React.SyntheticEvent) => {
         event.preventDefault();
         userService.login(username, password)
-            .then((_response:AxiosResponse) => {
+            .then((response:AxiosResponse) => {
+                const userInfo:UserInfo = response.data;
+                localStorage.setItem('name', userInfo.name)
+                userInfo.roles.forEach(
+                    role => localStorage.setItem(role, "true")
+                );
                 setNotification("Login was successful. Redirecting...");
                 setNotificationCounter(notificationCounter + 1);
                 setTimeout(() => navigate("/"), 2000);
@@ -51,9 +57,9 @@ const LoginPage = () => {
             <h1 className="commonFontColor" style={{textAlign: "center"}}>Login</h1>
             <NotificationDialog message={notification} dialogRef={notificationDialogRef}/>
             <form onSubmit={onLogin} className="commonFontColor">
-                <div >username: <input className="loginInput" type='text' onChange={(event) => setUsername(event.target.value)}/>
+                <div >username: <input className="commonInput" type='text' onChange={(event) => setUsername(event.target.value)}/>
                 </div>
-                <div>password: <input className="loginInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
+                <div>password: <input className="commonInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
                 <button className="navigationBarButton" type="submit">Login</button>
                 <div>New User? <Link className="newUserSignupText" to="/user/signup">Sign up</Link></div>
             </form>

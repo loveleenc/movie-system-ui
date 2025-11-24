@@ -43,7 +43,7 @@ const AllMovies = () => {
         <div className="movieFilterDialog">
           <MovieFilter setMovies={setMovies} allMovies={allMovies} />
         </div>
-        <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} />
+        <MovieInformation movie={getMovie()} dialogRef={movieDialogRef} comingSoon={false}/>
         <div className="moviesContainer">
           <div className={movies.length === 0 ? 'spinner' : ''}></div>
           {movies.map((movie, index) => (

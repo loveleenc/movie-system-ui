@@ -17,6 +17,7 @@ const ProfileHeader = () => {
 
   const onLogout = () => {
     userService.logout().then(_data => {
+      localStorage.clear();
       navigate("/")
     })
   }

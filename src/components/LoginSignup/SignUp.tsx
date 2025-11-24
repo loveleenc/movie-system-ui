@@ -74,11 +74,11 @@ const SignUp = () => {
             <NotificationDialog message={notification} dialogRef={notificationDialogRef}/>
             <form onSubmit={onSignUp} className="commonFontColor">
 
-                <div ><div className="inputTextContainer">First name: </div> <input className="loginInput" type='text' onChange={(event) => setFirstName(event.target.value)}/></div>
-                <div ><div className="inputTextContainer">Last name:</div> <input className="loginInput" type='text' onChange={(event) => setLastName(event.target.value)}/></div>
-                <div ><div className="inputTextContainer">E-mail: </div><input className="loginInput" type='text' onChange={(event) => setUserEmail(event.target.value)}/></div>
-                <div ><div className="inputTextContainer">username: </div><input name="newUsername" className="loginInput" type='text' onChange={(event) => setUsername(event.target.value)}/></div>
-                <div><div className="inputTextContainer">password: </div><input name="newPassword" className="loginInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
+                <div ><div className="inputTextContainer">First name: </div> <input className="commonInput" type='text' onChange={(event) => setFirstName(event.target.value)}/></div>
+                <div ><div className="inputTextContainer">Last name:</div> <input className="commonInput" type='text' onChange={(event) => setLastName(event.target.value)}/></div>
+                <div ><div className="inputTextContainer">E-mail: </div><input className="commonInput" type='text' onChange={(event) => setUserEmail(event.target.value)}/></div>
+                <div ><div className="inputTextContainer">username: </div><input name="newUsername" className="commonInput" type='text' onChange={(event) => setUsername(event.target.value)}/></div>
+                <div><div className="inputTextContainer">password: </div><input name="newPassword" className="commonInput" type='password' onChange={(event) => setPassword(event.target.value)}/></div>
                 <div className="inputTextContainer">Select user type(s)</div>
                 <div>
                     <label htmlFor="Regular User"><span>Regular User</span></label>

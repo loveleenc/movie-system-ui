@@ -1,5 +1,7 @@
 
 export enum ProfileItems {
     PROFILE = 'profile',
-    TICKETS = 'tickets'
+    TICKETS = 'tickets',
+    SHOWS = 'shows',
+    THEATRES = 'theatres'
 }

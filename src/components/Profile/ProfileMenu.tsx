@@ -1,4 +1,5 @@
 import { ProfileItems } from "../../types/profile";
+import { AccountType } from "../../types/user";
 
 
 interface MenuButtonProps {
@@ -20,20 +21,36 @@ const ProfileMenuButton = (props: MenuButtonProps) => {
 
 
 const ProfileMenu = ({ onClickChangeSelection }: { onClickChangeSelection: (item: ProfileItems) => void }) => {
-    const MenuItems = [
-        {
+    
+    const getMenuItems = () => {
+        const MenuItems = [
+            {
             buttonText: "Profile",
             element: ProfileItems.PROFILE,
-        },
-        {
+            }
+        ]
+        if(localStorage.getItem(AccountType.REGULAR_USER) === "true"){
+            MenuItems.push({
             buttonText: "Tickets",
             element: ProfileItems.TICKETS
+            })
         }
-    ]
+        if(localStorage.getItem(AccountType.THEATRE_OWNER) === "true"){
+            MenuItems.push({
+                buttonText: "Shows",
+                element: ProfileItems.SHOWS
+            })
+            MenuItems.push({
+                buttonText: 'Theatres',
+                element: ProfileItems.THEATRES,
+            })
+        }
+        return MenuItems;
+    }
 
     return (
         <div className="profileMenuContainer">
-            {MenuItems.map(item => <ProfileMenuButton menuItem={item}
+            {getMenuItems().map((item, index) => <ProfileMenuButton key={index} menuItem={item}
                 onClickChangeSelection={onClickChangeSelection} />)}
         </div>
     )
