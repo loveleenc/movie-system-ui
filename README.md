@@ -24,7 +24,7 @@ npm run build
 ```
 npm run test
 ```
-
+- To run the app along with the backend system, build this project and follow the instructions to launch the backend as mentioned [here](https://github.com/loveleenc/movie-system-backend)
 
 ## Screenshots
 
