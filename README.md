@@ -4,7 +4,6 @@
 - TypeScript
 - React
 - Vite
-- Vitest
 
 ## Installation:
 - Navigate to project directory and install dependencies:
@@ -20,10 +19,6 @@ npm run dev
 npm run build
 ```
 - Build files will be generated at ${PROJECT_DIR}/dist/
-- To run tests:
-```
-npm run test
-```
 - To run the app along with the backend system, build this project and follow the instructions to launch the backend as mentioned [here](https://github.com/loveleenc/movie-system-backend)
 
 ## Screenshots
