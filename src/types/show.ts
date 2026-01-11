@@ -10,7 +10,15 @@ export type Show = {
     movie: Movie;
 }
 
-export interface ShowsByTheatre extends Theatre {
+export type ShowByMovie = {
+    language: string;
+    startTime: Date;
+    endTime: Date;
+    id: string;
+    theatreDto: Theatre;
+}
+
+export interface ShowsByTheatre extends Theatre{
     languages: ShowsByLanguage[];
 }
 

@@ -1,37 +1,50 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { Show, ShowsByTheatre } from "../types/show";
+import type { Show, ShowByMovie, ShowsByTheatre } from "../types/show";
 import config from "../utils/config";
 
 const baseUrl: string = config.BASE_URL;
+
+const getShowTime = (startOrEndTime:Date):string => {
+  return new Date(startOrEndTime).toLocaleTimeString("en-US", {
+          timeStyle: "short",
+        });
+}
+
+const getShowDate = (startTime:Date):string => {
+  return new Date(startTime).toLocaleString("default", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+}
 
 const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
   //TODO: refactor this crap
   const showsByTheatre = new Array<ShowsByTheatre>();
 
   const shows = await axios.get(`${baseUrl}/movie/${movieId}/shows`);
-  shows.data.map((show: Show) => {
+
+
+  
+  shows.data.map((show: ShowByMovie) => {
     const theatre = showsByTheatre.find(
-      (theatre) => theatre.id === show.theatre.id
+      (theatre) => theatre.id === show.theatreDto.id
     );
+
+
     if (theatre !== undefined) {
       const language = theatre.languages.find(
         (lang) => lang.language === show.language
       );
 
       const singleShow = {
-        startTime: new Date(show.startTime).toLocaleTimeString("en-US", {
-          timeStyle: "short",
-        }),
-        endTime: new Date(show.endTime).toLocaleTimeString("en-US", {
-          timeStyle: "short",
-        }),
-        date: new Date(show.startTime).toLocaleString("default", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }),
+        startTime: getShowTime(show.startTime),
+        endTime: getShowTime(show.endTime),
+        date: getShowDate(show.startTime),
         id: show.id,
       };
+
+
       if (language !== undefined) {
         language.shows.push(singleShow);
       } else {
@@ -42,26 +55,17 @@ const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
       }
     } else {
       const newTheatre: ShowsByTheatre = {
-        name: show.theatre.name,
-        location: show.theatre.location,
-        id: show.theatre.id,
+        name: show.theatreDto.name,
+        location: show.theatreDto.location,
+        id: show.theatreDto.id,
         languages: [
           {
             language: show.language,
             shows: [
               {
-                startTime: new Date(show.startTime).toLocaleTimeString(
-                  "en-US",
-                  { timeStyle: "short" }
-                ),
-                endTime: new Date(show.endTime).toLocaleTimeString("en-US", {
-                  timeStyle: "short",
-                }),
-                date: new Date(show.startTime).toLocaleString("default", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                }),
+                startTime: getShowTime(show.startTime),
+                endTime: getShowTime(show.endTime),
+                date: getShowDate(show.startTime),
                 id: show.id,
               },
             ],
