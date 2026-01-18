@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { Show, ShowByMovie, ShowsByTheatre } from "../types/show";
+import type {  ShowByMovie, ShowsByTheatre } from "../types/show";
 import config from "../utils/config";
+import { TheatreShow } from "../types/profile";
 
 const baseUrl: string = config.BASE_URL;
 
@@ -78,7 +79,7 @@ const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
   return showsByTheatre;
 };
 
-const getShowsForTheatre = (theatreId: number):Promise<AxiosResponse<Show[]>> => {
+const getShowsForTheatre = (theatreId: number):Promise<AxiosResponse<TheatreShow[]>> => {
 
   return axios.get(`${baseUrl}/theatre/${theatreId}/shows`, { withCredentials: true });
 }

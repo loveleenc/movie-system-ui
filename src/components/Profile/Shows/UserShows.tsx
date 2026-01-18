@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import showService from "../../../services/showService";
-import { Show } from "../../../types/show";
 import "../../../styles/profile/shows.css"
 import common from "../../../utils/common";
 import NotificationDialog from "../../Common/NotificationDialog";
+import { TheatreShow } from "../../../types/profile";
 
-const TheatreShowing = ({ show, cancelShow }: { show: Show; cancelShow: (id:string) => void }) => {
+const TheatreShowing = ({ show, cancelShow }: { show: TheatreShow; cancelShow: (id:string) => void }) => {
     return (
         <div className="theatreShowingSingle">
             <div className="theatreShowingDataPoint">{common.getDate(show.startTime.toString())}</div>
             <div className="theatreShowingDataPoint">{common.getTimeInHHMM(show.startTime.toString())}</div>
             <div className="theatreShowingDataPoint">{common.getTimeInHHMM(show.endTime.toString())}</div>
-            <div className="theatreShowingDataPoint">{show.movie.name}</div>
+            <div className="theatreShowingDataPoint">{show.movieName}</div>
             <div className="theatreShowingDataPoint">{show.language}</div>
             <div className="theatreShowingDataPoint"><button
             onClick={() => cancelShow(show.id)}>Cancel Show</button></div>
@@ -21,7 +21,7 @@ const TheatreShowing = ({ show, cancelShow }: { show: Show; cancelShow: (id:stri
 
 
 const UserShows = ({id, setTheatreId}: {id:number; setTheatreId: React.Dispatch<React.SetStateAction<number>>}) => {
-    const [shows, setShows] = useState<Show[]>([]);
+    const [shows, setShows] = useState<TheatreShow[]>([]);
     const notificationDialogRef = useRef<HTMLDialogElement | null>(null);
     const [notificationCounter, setNotificationCounter] = useState<number>(0);
     const [message, setMessage] = useState<string>('');
