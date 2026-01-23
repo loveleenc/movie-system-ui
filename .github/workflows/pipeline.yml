@@ -31,13 +31,13 @@ jobs:
         working-directory: ${{github.workspace}}/main
         run: npm run build
 
-      - name: create compressed build
-        working-directory: ${{github.workspace}}/main/dist
-        run: tar -czvf ../${{ github.sha }}.tar .
+      # - name: create compressed build
+      #   working-directory: ${{github.workspace}}/main/dist
+      #   run: tar -czvf ../${{ github.sha }}.tar .
 
       - name: upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ github.sha }}_build
-          path: '${{github.workspace}}/main/${{ github.sha }}.tar'
+          path: '${{github.workspace}}/main/dist'
 
