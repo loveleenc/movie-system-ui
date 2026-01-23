@@ -1,0 +1,35 @@
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: ['22.x']
+    if: contains(github.event.head_commit.message, '[deploy]')
+    steps:
+      - name: checkout ui repository
+        uses: actions/checkout@v4
+        with:
+          path: main
+      - name: get node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+
+      - name: install project dependencies
+        working-directory: ${{github.workpace}}/main
+        run: npm install
+
+      - name: create minified build
+        working-directory: ${{github.workpace}}/main
+        run: npm run build
+
+      - name: create compressed build
+        working-directory: ${{github.workpace}}/main/dist
+        run: tar -czvf ${{ github.sha }}.tar
+
+      - name: upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.sha }}_build
+          path: '${{github.workpace}}/main/dist/${{ github.sha }}.tar'
+
