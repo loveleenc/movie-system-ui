@@ -33,7 +33,7 @@ jobs:
 
       - name: create compressed build
         working-directory: ${{github.workspace}}/main/dist
-        run: tar -czvf ${{ github.sha }}.tar
+        run: tar -czvf ${{ github.sha }}.tar .
 
       - name: upload build artifact
         uses: actions/upload-artifact@v4
