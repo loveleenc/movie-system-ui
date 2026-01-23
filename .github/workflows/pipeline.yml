@@ -1,3 +1,12 @@
+name: movie-frontend-workflow
+run-name: build and upload compressed build artifact
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
