@@ -3,10 +3,13 @@ import theatreService from "../../../services/theatreService";
 import { NewTheatre, Theatre, TheatreRow } from "../../../types/theatre";
 import TheatreItem from "./TheatreItem";
 import NewTheatreDialog from "./NewTheatreDialog";
+import NewShowDialog from "./NewShowDialog";
 
 const UserTheatres = ({theatreId, setTheatreId}: {theatreId:number; setTheatreId: React.Dispatch<React.SetStateAction<number>>}) => {
     const [theatres, setTheatres] = useState<Theatre[]>([]);
     const newTheatreDialogRef = useRef<HTMLDialogElement | null>(null);
+    const newShowDialogRef = useRef<HTMLDialogElement | null>(null);
+
     useEffect(() => {
         theatreService.getTheatres()
             .then(response => {
@@ -48,9 +51,11 @@ const UserTheatres = ({theatreId, setTheatreId}: {theatreId:number; setTheatreId
     return (
         <div style={{display: theatreId !== 0 ? 'none' : ''}} className="profileItemViewContainer">
             <NewTheatreDialog dialogRef={newTheatreDialogRef} createNewTheatre={createNewTheatre}/>
+            <NewShowDialog dialogRef={newShowDialogRef} theatres={theatres} />
             <div>
                 <h1 className="commonFontColor">Theatres</h1>
                 <button onClick={() => newTheatreDialogRef.current?.showModal()} className="profileItemButton">Add theatre</button>
+                <button onClick={() => newShowDialogRef.current?.showModal()} className="profileItemButton">Add new Show</button>
             </div>
             <hr />
             {theatres.map((theatre, index) => <TheatreItem key={index} theatre={theatre} setTheatreId={setTheatreId}/>)}

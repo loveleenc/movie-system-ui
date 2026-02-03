@@ -1,22 +1,22 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import type {  ShowByMovie, ShowsByTheatre } from "../types/show";
+import type { ShowByMovie, ShowsByTheatre } from "../types/show";
 import config from "../utils/config";
 import { TheatreShow } from "../types/profile";
 
 const baseUrl: string = config.BASE_URL;
 
-const getShowTime = (startOrEndTime:Date):string => {
+const getShowTime = (startOrEndTime: Date): string => {
   return new Date(startOrEndTime).toLocaleTimeString("en-US", {
-          timeStyle: "short",
-        });
+    timeStyle: "short",
+  });
 }
 
-const getShowDate = (startTime:Date):string => {
+const getShowDate = (startTime: Date): string => {
   return new Date(startTime).toLocaleString("default", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        });
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
@@ -26,7 +26,7 @@ const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
   const shows = await axios.get(`${baseUrl}/movie/${movieId}/shows`);
 
 
-  
+
   shows.data.map((show: ShowByMovie) => {
     const theatre = showsByTheatre.find(
       (theatre) => theatre.id === show.theatreDto.id
@@ -79,29 +79,46 @@ const getShowsForMovie = async (movieId: number): Promise<ShowsByTheatre[]> => {
   return showsByTheatre;
 };
 
-const getShowsForTheatre = (theatreId: number):Promise<AxiosResponse<TheatreShow[]>> => {
+const getShowsForTheatre = (theatreId: number): Promise<AxiosResponse<TheatreShow[]>> => {
 
   return axios.get(`${baseUrl}/theatre/${theatreId}/shows`, { withCredentials: true });
 }
 
 const cancelShow = (id: string) => {
   const csrfToken = document.cookie.replace(
-          /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
-          "$1"
-      );
-      const requestConfig: AxiosRequestConfig = {
-          params: { showId: id }, 
-          withCredentials: true, 
-          headers: {
-              "X-XSRF-TOKEN": csrfToken,
-          }
-      }
+    /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  const requestConfig: AxiosRequestConfig = {
+    params: { showId: id },
+    withCredentials: true,
+    headers: {
+      "X-XSRF-TOKEN": csrfToken,
+    }
+  }
   return axios.patch(`${baseUrl}/show/cancel`, {}, requestConfig);
+}
+
+const createShow = (data: object) => {
+  const csrfToken = document.cookie.replace(
+    /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  const requestConfig: AxiosRequestConfig = {
+    withCredentials: true,
+    headers: {
+      "X-XSRF-TOKEN": csrfToken,
+    }
+  }
+  return axios.post(`${baseUrl}/show`, data, requestConfig);
+
+
 }
 
 
 export default {
   getShowsForMovie,
   getShowsForTheatre,
-  cancelShow
+  cancelShow,
+  createShow
 };
